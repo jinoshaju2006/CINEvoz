@@ -29,6 +29,7 @@ jobs:
         run: |
           rsync -a --exclude='.git/' --exclude='android/app/fumio-release.p12' source/ ./
           rm -f android/app/fumio-release.p12
+          rm -rf source
           python3 - <<'PY'
           import json, pathlib, re
           p = pathlib.Path("package.json")
