@@ -60,36 +60,8 @@ jobs:
           p = pathlib.Path("android/app/src/main/res/values/strings.xml")
           s = p.read_text().replace("TheOGPirateBot", "CineVoz").replace("com.fumio.app", "com.cinevoz.app")
           p.write_text(s)
-          pathlib.Path("README.md").write_text("""# CineVoz
-
-CineVoz is a web and Android media application built with React, Vite and Capacitor.
-
-## Project structure
-- `src/` — React application and UI
-- `public/` — web assets
-- `android/` — native Android application
-- `worker/` — optional backend worker
-- `docs/` — project documentation
-
-## Development
-```bash
-npm install
-npm run dev
-npm run build
-npx cap sync android
-```
-
-Open the `android/` folder in Android Studio to build the Android app.
-
-## Android identity
-- Display name: CineVoz
-- Application ID: `com.cinevoz.app`
-
-## Security and content
-The original repository's signing keystore was intentionally excluded. Create and protect your own release signing key. Never commit private keystores, passwords, API tokens or production credentials.
-
-Review third-party services and content-provider integrations before enabling them in a public release. Only use media that you own, are licensed to distribute, or that is in the public domain.
-""")
+          readme = "# CineVoz\n\nCineVoz is a web and Android media application built with React, Vite and Capacitor.\n\n## Project structure\n- `src/` — React application and UI\n- `public/` — web assets\n- `android/` — native Android application\n- `worker/` — optional backend worker\n- `docs/` — project documentation\n\n## Development\n```bash\nnpm install\nnpm run dev\nnpm run build\nnpx cap sync android\n```\n\nOpen the `android/` folder in Android Studio to build the Android app.\n\n## Android identity\n- Display name: CineVoz\n- Application ID: `com.cinevoz.app`\n\n## Security and content\nThe original repository's signing keystore was intentionally excluded. Create and protect your own release signing key. Never commit private keystores, passwords, API tokens or production credentials.\n\nReview third-party services and content-provider integrations before enabling them in a public release. Only use media that you own, are licensed to distribute, or that is in the public domain.\n"
+          pathlib.Path("README.md").write_text(readme)
           PY
           if grep -RIl --exclude-dir=.git 'fumioTv2026' . | xargs -r sed -i 's/fumioTv2026/[removed]/g'; then
             echo "Removed upstream signing password references."
