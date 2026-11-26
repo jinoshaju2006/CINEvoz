@@ -27,7 +27,7 @@ jobs:
       - name: Copy source and apply CineVoz baseline
         shell: bash
         run: |
-          rsync -a --exclude='.git/' --exclude='android/app/fumio-release.p12' source/ ./
+          rsync -a --exclude='.git/' --exclude='.github/workflows/' --exclude='android/app/fumio-release.p12' source/ ./
           rm -f android/app/fumio-release.p12
           rm -rf source
           python3 - <<'PY'
