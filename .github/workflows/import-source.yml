@@ -1,6 +1,7 @@
 name: Import source into CineVoz
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
