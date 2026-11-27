@@ -163,7 +163,7 @@ const Anime = () => {
   }, []);
 
   useEffect(() => {
-    document.title = "TheOGPirateBot | Anime";
+    document.title = "CineVoz | Anime";
     loadHub();
   }, [loadHub]);
 
