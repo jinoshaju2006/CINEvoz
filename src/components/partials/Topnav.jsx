@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/useAccount.js";
 import { displayInitial, isRealUser } from "../../utils/auth.js";
-import { DISCORD_INVITE_URL } from "../../utils/externalLinks.js";
 import { LOOK_EVENT, LOOK_SYNCED_EVENT, readLook } from "../../utils/profileLook.js";
 
 const Topnav = () => {
@@ -24,9 +23,9 @@ const Topnav = () => {
   return (
     <header className="sticky top-0 z-[100] w-full border-b border-white/[0.06] bg-black/85 backdrop-blur-md select-none">
       <div className="mx-auto flex h-[52px] w-full max-w-[1600px] items-center justify-between gap-2 px-3 sm:px-6 lg:px-10">
-        <Link to="/" aria-label="TheOGPirateBot Home" className="group flex min-w-0 shrink-0 items-center gap-2.5 text-white">
+        <Link to="/" aria-label="CineVoz Home" className="group flex min-w-0 shrink-0 items-center gap-2.5 text-white">
           <img src="/logo.svg" alt="" className="h-8 w-8 shrink-0" />
-          <span className="hidden font-display text-[13px] font-bold tracking-tight group-hover:text-zinc-200 xs:inline sm:text-sm">TheOGPirateBot</span>
+          <span className="hidden font-display text-[13px] font-bold tracking-tight group-hover:text-zinc-200 xs:inline sm:text-sm">CineVoz</span>
         </Link>
         <div className="gtv-no-scrollbar flex min-w-0 items-center gap-1.5 overflow-x-auto sm:gap-2">
           <Link
