@@ -56,7 +56,7 @@ const Explore = () => {
   const pageTitle = titleFor(filters);
 
   useEffect(() => {
-    document.title = `TheOGPirateBot | ${pageTitle}`;
+    document.title = `CineVoz | ${pageTitle}`;
   }, [pageTitle]);
 
   const [items, setItems] = useState([]);
