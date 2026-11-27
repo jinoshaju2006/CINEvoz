@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace "com.fumio.app"
+    compileSdk rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.cinevoz.app"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        // The in-app updater (Updater.java) asks one question: "is the published
+        // build newer than mine?" Release tags are
+        // theogpiratebot-apk-<github run_number>, so CI stamps the same number
+        // here and the answer is a single integer comparison. Local builds
+        // without the env var keep 1 and simply never offer an update.
+        // Parsed defensively: a versionCode that overflows an int (or an empty
+        // env var) must never be the reason a release fails to build.
+        def stamped = 1
+        try {
+            def raw = System.getenv("OGPB_VERSION_CODE")
+            if (raw != null && raw.trim().isInteger()) stamped = raw.trim().toInteger()
+        } catch (Exception ignored) {
+            stamped = 1
+        }
+        versionCode stamped
+        versionName "1." + stamped
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+
+    testOptions {
+        unitTests {
+            // TvMode, Downloader and Updater reference android.* types. With
+            // the stubs returned instead of thrown, they are testable on the
+            // JVM; the behaviour that really needs a device lives in
+            // androidTest and runs on the TV emulator in CI.
+            returnDefaultValues = true
+        }
+    }
+
+    buildTypes {
+        debug {
+            // CI publishes the debug variant, so it has to carry the stable key.
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation project(':capacitor-android')
+    testImplementation "junit:junit:$junitVersion"
+    // The unit tests exercise the parts of the app that touch Android types
+    // (TvMode asks the PackageManager a question). Mockito lets those run on a
+    // plain JVM in CI with no emulator and no device.
+    testImplementation "org.mockito:mockito-core:5.11.0"
+    testImplementation "org.json:json:20231013"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+    implementation "androidx.webkit:webkit:$androidxWebkitVersion"
+    // Native playback for downloaded files (OfflinePlayerActivity): MKV with
+    // every embedded audio track and subtitle selectable, which a WebView
+    // <video> cannot do.
+    implementation "androidx.media3:media3-exoplayer:1.4.1"
+    implementation "androidx.media3:media3-ui:1.4.1"
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}

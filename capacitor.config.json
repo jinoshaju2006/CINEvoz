@@ -1,0 +1,17 @@
+{
+  "appId": "com.cinevoz.app",
+  "appName": "CineVoz",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": []
+  },
+  "android": {
+    "adjustMarginsForEdgeToEdge": "auto"
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": false
+    }
+  }
+}

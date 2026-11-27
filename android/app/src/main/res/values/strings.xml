@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">CineVoz</string>
+    <string name="title_activity_main">CineVoz</string>
+    <string name="package_name">com.cinevoz.app</string>
+    <string name="custom_url_scheme">com.cinevoz.app</string>
+</resources>
