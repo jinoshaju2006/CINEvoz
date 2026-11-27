@@ -18,7 +18,7 @@ const Footer = () => (
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-black" aria-hidden="true">
             <i className="ri-tv-fill text-xl" />
           </span>
-          TheOGPirateBot
+          CineVoz
         </Link>
         <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-400">
           Less scrolling, more watching. Find movies and shows in one place.
