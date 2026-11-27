@@ -178,7 +178,7 @@ const MediaHub = ({ mediaType = "movie" }) => {
   }, [category, config, genre, isFiltered, language, sort]);
 
   useEffect(() => {
-    document.title = `TheOGPirateBot | ${isFiltered ? `${genre ? "Featured" : language ? "Language" : "Top Rated"} ${config.label}` : config.label}`;
+    document.title = `CineVoz | ${isFiltered ? `${genre ? "Featured" : language ? "Language" : "Top Rated"} ${config.label}` : config.label}`;
     if (isFiltered) return undefined;
     loadHub();
     return undefined;
