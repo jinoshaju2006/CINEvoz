@@ -1,7 +1,7 @@
 {
-  "name": "TheOGPirateBot — Movies & TV",
-  "short_name": "TheOGPirateBot",
-  "description": "Movie, TV and anime streaming — Details + Player.",
+  "name": "CineVoz — Movies & TV",
+  "short_name": "CineVoz",
+  "description": "CineVoz — movies, series and media playback.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
